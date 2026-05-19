@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cameron Galibois — Mechanical Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --ink-muted: #6b6b65;
+      --ink-faint: #b0afa8;
+      --paper: #f5f3ee;
+      --paper-warm: #ede9e1;
+      --accent: #b04a2a;
+      --accent-light: #f0e8e3;
+      --border: rgba(26,26,24,0.12);
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 4rem;
+      background: var(--paper);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* SECTIONS */
+    section { padding: 7rem 4rem; max-width: 1100px; margin: 0 auto; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--ink-muted);
+    }
+    .hero-tagline {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--ink-muted);
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+    .hero-divider {
+      width: 100%;
+      height: 0.5px;
+      background: var(--border);
+      margin-top: 5rem;
+    }
+
+    /* ABOUT */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1; height: 0.5px;
+      background: var(--border);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text h2 {
+      font-size: 2.8rem;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .about-text h2 em { font-style: italic; color: var(--ink-muted); }
+    .about-text p {
+      font-size: 1rem;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      line-height: 1.9;
+    }
+    .about-sidebar { padding-top: 0.5rem; }
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .stat-row:first-child { border-top: 0.5px solid var(--border); }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    /* HERO PHOTO */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-photo-wrap {
+      width: 300px;
+      height: 380px;
+      flex-shrink: 0;
+    }
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 0.5px solid var(--border);
+      display: block;
+    }
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      border: 0.5px dashed var(--border);
+      background: var(--paper-warm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .hero-photo-placeholder span {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+
+    .group-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 2rem;
+      padding: 2rem 2.5rem;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .group-header-left { flex: 1; }
+    .group-org {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.6rem;
+    }
+    .group-title {
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--paper);
+      margin-bottom: 0.75rem;
+    }
+    .group-title em { font-style: italic; color: var(--ink-faint); }
+    .group-desc {
+      font-size: 0.92rem;
+      color: rgba(245,243,238,0.6);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+    .group-role-badge {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      background: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      align-self: flex-start;
+      margin-top: 0.25rem;
+    }
+    .subproject-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .subproject-card {
+      background: var(--paper-warm);
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .subproject-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(26,26,24,0.08);
+    }
+    .subproject-card.full-width { grid-column: 1 / -1; }
+    .subproject-card.with-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .subproject-card.role-card {
+      background: var(--paper);
+      border-left: 2px solid var(--accent);
+    }
+    .image-pair {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .project-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 0.5px solid var(--border);
+      display: block;
+    }
+    .desc-placeholder {
+      font-size: 0.88rem;
+      color: var(--ink-faint);
+      font-style: italic;
+      line-height: 1.8;
+      border: 0.5px dashed var(--border);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      margin-top: 0.75rem;
+    }
+
+    /* CLASS PROJECTS */
+    .class-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .class-card {
+      background: var(--paper-warm);
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .class-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(26,26,24,0.08);
+    }
+    .class-card.with-photo {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .class-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 0.5px solid var(--border);
+    }
+
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--paper-warm);
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(26,26,24,0.08);
+    }
+    .project-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .project-number {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      margin-bottom: 1.25rem;
+    }
+    .project-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .project-meta {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .tech-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      border: 0.5px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .project-visual {
+      background: var(--border);
+      border-radius: 2px;
+      height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-visual svg { opacity: 0.18; }
+
+    /* RESUME */
+    .resume-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .timeline-year {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-faint);
+      padding-top: 0.25rem;
+    }
+    .timeline-role {
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+    .timeline-company {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+    }
+    .skills-section h3 {
+      font-size: 0.68rem;
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+    .skills-section h3:first-child { margin-top: 0; }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+      padding: 0.4rem 0;
+      border-bottom: 0.5px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+    }
+    .skill-list li:hover .skill-dot { opacity: 1; }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--ink);
+      text-decoration: none;
+      padding: 0.9rem 1.75rem;
+      border-radius: 2px;
+      margin-top: 2.5rem;
+      transition: background 0.2s;
+    }
+    .download-btn:hover { background: var(--accent); }
+
+    /* CONTACT */
+    #contact { background: var(--paper-warm); }
+    #contact > * { max-width: 1100px; margin: 0 auto; }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-heading {
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .contact-heading em { font-style: italic; color: var(--ink-muted); }
+    .contact-text {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .contact-links { list-style: none; }
+    .contact-links li {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .contact-links li:first-child { border-top: 0.5px solid var(--border); }
+    .contact-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-links a:hover { color: var(--accent); }
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      min-width: 70px;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--ink);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--ink-faint);
+    }
+    .form-submit {
+      align-self: flex-start;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--ink);
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 0.5px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-faint);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-label  { animation: fadeUp 0.6s ease both; }
+    .hero-name   { animation: fadeUp 0.7s 0.1s ease both; }
+    .hero-tagline{ animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-cta    { animation: fadeUp 0.7s 0.3s ease both; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      .about-grid, .projects-grid, .resume-layout,
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .project-card.featured { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Cameron Galibois · ME</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#duke-aero">Duke AERO</a></li>
+    <li><a href="#class-projects">Class Projects</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-label">Mechanical Engineer</p>
+      <h1 class="hero-name">Cameron<br /><em>Galibois</em></h1>
+      <p class="hero-tagline">Mechanical engineering student at Duke University — building rockets, designing systems, and solving hard problems from first principles.</p>
+      <a href="#duke-aero" class="hero-cta">View my work →</a>
+    </div>
+    <div class="hero-photo-wrap">
+      <!-- Replace the src below with your photo filename, e.g. src="headshot.jpg" -->
+      <div class="hero-photo-placeholder">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="12" r="5" stroke="#b0afa8" stroke-width="1.2"/>
+          <path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#b0afa8" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <img src="Graduation.jpg" class="hero-photo" />
+      </div>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">01 — About</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Engineering from <em>concept</em> to completion.</h2>
+      <p>I'm a recent graduate who majored in Mechanical Engineering at Duke University's Pratt School of Engineering, graduating in May 2026 with a Certificate in Aerospace Engineering and a 3.909 GPA. I thrive at the intersection of design, analysis, and fabrication — comfortable taking a project from a blank CAD file through FEA, machining, and final assembly.</p>
+      <p>My hands-on experience spans rocketry avionics, industrial pneumatics, and control systems. Whether optimizing a bulkhead for weight, designing a pneumatics circuit for cylinder application, or tuning a PID controller to levitate a metal ball, I bring the same first-principles rigor to every problem.</p>
+      <p>Outside of coursework, I serve as Treasurer and Avionics & Payload Engineer for Duke AERO, where I manage over $40,000 in team budget and helped earn a perfect design score and the Jim Furfaro Award for technical excellence at the Spaceport America Cup.</p>
+    </div>
+    <div class="about-sidebar">
+      <div class="stat-row">
+        <span class="stat-label">GPA</span>
+        <span class="stat-value">3.909 <em style="font-size: 1rem; font-style: italic; color: var(--ink-muted);">Cum Laude</em></span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Graduating</span>
+        <span class="stat-value">May '26</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Degree</span>
+        <span class="stat-value">BSE</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Experience</span>
+        <span class="stat-value" style="font-size: 1rem; line-height: 1.5; text-align: right;">3 years professional club<br/>2 engineering internships</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUKE AERO -->
+<section id="duke-aero">
+  <p class="section-label">02 — Duke AERO</p>
+
+  <!-- Group Header -->
+  <div class="group-header">
+    <div class="group-header-left">
+      <p class="group-org">Student Rocketry Organization · Duke University</p>
+      <h2 class="group-title">Duke <em>AERO</em></h2>
+      <p class="group-desc">Duke AERO is the school's rocketry team competing in the International Rocket Engineering Competition. I contribute as both a technical team member and in a financial leadership role.</p>
+    </div>
+    <span class="group-role-badge">Active Member</span>
+  </div>
+
+  <div class="subproject-grid">
+
+    <!-- Avionics Bay — featured with photos -->
+    <div class="subproject-card full-width with-images">
+      <div>
+        <p class="project-number">001 / Engineering</p>
+        <span class="project-tag">Avionics</span>
+        <h3 class="project-title">Avionics Bay</h3>
+        <p class="project-desc">For the team's rocket competing in IREC 2025, I was tasked with developing a housing system for the electronics of the rocket. The project was presented to me with a length constraint and component requirements, and I designed around these necessities to create a lightweight and industry standard solution.</p>
+        <p class="project-desc">The bay was designed in an Onshape part studio and manufactured using a combination of techniques. I designed the profile of the bulkheads in Onshape, and they were then analyzed using FEA in Ansys. I created a toolpath for and machined the blackbox using a CNC mill. The overall assembly underwent multiple iterations as the electronics developed throughout the year, requiring extensive communication with our electrical engineers. The frequent changes to design were the main motivation in constructing the bay panels using a 3d printer.</p>
+        <div class="project-meta" style="margin-top: 1rem;">
+          <span class="tech-tag">3D Printing</span>
+          <span class="tech-tag">Avionics Integration</span>
+          <span class="tech-tag">CNC Milling</span>
+          <span class="tech-tag">FEA and Toolpath Programming</span>
+        </div>
+      </div>
+      <div class="image-pair">
+        <img src="Av Bay Bottom.jpg" alt="Avionics bay bottom view showing electronics and wiring" class="project-photo" />
+        <img src="Av Bay Top.jpg" alt="Avionics bay top view showing flight computers and sensors" class="project-photo" />
+      </div>
+    </div>
+
+    <!-- Treasurer role card -->
+    <div class="subproject-card full-width role-card">
+      <p class="project-number">002 / Leadership</p>
+      <span class="project-tag" style="background: rgba(176,74,42,0.08); color: var(--accent);">Treasurer</span>
+      <h3 class="project-title">Team Treasurer</h3>
+      <p class="project-desc">As treasurer, I manage the team's budget, track expenditures across subteams, coordinate with Duke's student organization financial office and other financial sources, and handle procurement for components and competition costs.</p>
+      <p class="project-desc"> I have managed over $50,000 in budget on behalf of the team to maximize rocketry capabilities. I constantly weigh the costs and benefits of currents desires with long term goals to make informed decisions that help poise the club for future success.</p>
+      <p class="project-desc"> Aside from my direct financial work as treasurer, I have also served as a representative of the club at Duke's SPACE symposium and recruiting efforts. As a tenured member of the club, I am often turned to for technical and bureaucratic advice. </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLASS PROJECTS -->
+<section id="class-projects" style="padding-top: 0;">
+  <p class="section-label">03 — Class Projects</p>
+
+  <div class="group-header">
+    <div class="group-header-left">
+      <p class="group-org">Duke University · Mechanical Engineering</p>
+      <h2 class="group-title">Academic <em>Work</em></h2>
+      <p class="group-desc">A selection of hands-on design and engineering projects completed through Duke's mechanical engineering curriculum.</p>
+    </div>
+  </div>
+
+  <div class="class-grid">
+
+    <!-- Senior Design Capstone — with photo, full width -->
+    
+    <div class="class-card with-photo">
+      <div>
+        <p class="project-number">001</p>
+        <span class="project-tag">Design Build</span>
+        <h3 class="project-title">Active Suspension Robot</h3>
+        <p class="project-desc">For my capstone project across a semester and a half of classes, myself and groupmates developed an active suspension robot to mitigate impact forces from parachute landings. As a self-proposed project, we assigned ourselves design criteria around impact speed and forces. These criteria were informed by military and NASA experts with whom we met to discuss our project. An actively controlled braking system was developed to apply an appropriate deceleration profile to minimize impact forces transmitted to a payload. </p>
+        <div class="project-meta" style="margin-top: 1rem;">
+          <span class="tech-tag">Active Control</span>
+          <span class="tech-tag">Large Assembly</span>
+        </div>
+      </div>
+      <img src="Capstone Project.jpeg" alt="Final Prototype of Active Suspension Robot" class="class-photo" />
+    </div>
+    
+    <!-- State Fair — with photo, full width -->
+    
+    <div class="class-card with-photo">
+      <div>
+        <p class="project-number">002</p>
+        <span class="project-tag">Design Build</span>
+        <h3 class="project-title">The aMAIZEing Race — State Fair Project</h3>
+        <p class="project-desc">Aiming to design a game of skill for a young audience, my team decided to make a rotatable maze for children to navigate a ball from the top to bottom. I handled the majority of the design work for the team, developing a 3d printable solution consisting of a bearing and shaft interface to connect the maze and base. The parts were joined using threaded heat inserts and fasteners for rigidity and aesthetics. </p>
+        <div class="project-meta" style="margin-top: 1rem;">
+          <span class="tech-tag">3D Printing</span>
+          <span class="tech-tag">Design to Manufacture</span>
+        </div>
+      </div>
+      <img src="State Fair Project.jpeg" alt="State fair maze project on display table" class="class-photo" />
+    </div>
+
+    <!-- Pressure Vessel -->
+    <div class="class-card with-photo">
+     <div>
+      <p class="project-number">003</p>
+       <span class="project-tag">Structural Analysis</span>
+       <h3 class="project-title">Pressure Vessel</h3>
+       <p class="project-desc">As a part of my senior year mechanical capstone course, I was tasked with building a pressure vessel. The assignment was simple - design a part to withstand a provided pressure with an assigned fitting. I designed the assembly to minimize machining time and maximize robustness, as weight and material costs were not considered. </p>
+       <div class="project-meta" style="margin-top: 1rem;">
+         <span class="tech-tag">FEA</span>
+         <span class="tech-tag">Pressure Analysis</span>
+       </div>
+      </div> 
+      <img src="Pressure Vessel.jpeg" alt="Pressure Vessel Isometric View" class="class-photo" />
+    </div>
+
+    <!-- Pump Stand -->
+    <div class="class-card with-photo">
+     <div>
+       <p class="project-number">004</p>
+       <span class="project-tag">Fluid Systems</span>
+       <h3 class="project-title">Pump Stand</h3>
+       <p class="project-desc" style="margin-top: 0.5rem;">As a group project during a junior design course, myself and classmates designed a pump stand with the goals of minimizng deflection and weight. The stand needed to withstand a provided torsion and fit into a predetermined mounting bracket. Taking the project from start to finish, our group designed, analyzed, and built the project using combinations of hand calculations and analytical softwares.</p>
+       <div class="project-meta" style="margin-top: 1rem;">
+         <span class="tech-tag">Class Project</span>
+         <span class="tech-tag">Mechanical Design</span>
+       </div>
+      </div> 
+      <img src="Pump Stand.jpeg" alt="Pump Stand Test Setup" class="class-photo" />
+    </div>
+
+    <!-- Magnetic Levitation -->
+    <div class="class-card" style="grid-column: 1 / -1;">
+      <p class="project-number">005</p>
+      <span class="project-tag">Electromagnetics</span>
+      <h3 class="project-title">Magnetic Levitation</h3>
+      <p class="project-desc" style="margin-top: 0.5rem;">During my Control Systems course, we finished our labs for with a magnetic levitation (Maglev) project. Working with as a team of four, I led the development of a LabView code to orient a PID controller and stabilize an unstable system. A metal ball was levitated to respond to four different inputs - constant, sine, square, and random. The ball responded to each change and mirrored the input signal spontaneously.</p>
+      <div class="project-meta" style="margin-top: 1rem;">
+        <span class="tech-tag">Group Work</span>
+        <span class="tech-tag">PID</span>
+        <span class="tech-tag">LabView</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <p class="section-label">04 — Resume</p>
+  <div class="resume-layout">
+    <div>
+
+      <!-- Education -->
+      <div class="timeline-item">
+        <div class="timeline-year">2022 –<br/>2026</div>
+        <div>
+          <p class="timeline-role">B.S.E. in Mechanical Engineering</p>
+          <p class="timeline-company">Duke University · Pratt School of Engineering · Durham, NC</p>
+          <p class="timeline-desc">Certificate in Aerospace Engineering. GPA: 3.909 — Cum Laude. Relevant coursework: Aerospace Structures, Aerodynamics, Mechanical Design.</p>
+        </div>
+      </div>
+
+      <!-- Duke AERO -->
+      <div class="timeline-item">
+        <div class="timeline-year">Aug 2023 –<br/>Present</div>
+        <div>
+          <p class="timeline-role">Treasurer · Avionics &amp; Payload Engineer</p>
+          <p class="timeline-company">Duke Aerospace Club · Durham, NC</p>
+          <p class="timeline-desc">Modeled avionics bay in CAD to house necessary electrical components for rocket flight. Organized over $40,000 in budget to maximize team rocketry capabilities. Optimized bulkheads with FEA for 52% weight reduction to withstand 885N force. Machined components including the black box and servo linkages using a CNC mill. Received a perfect design score and the Jim Furfaro Award for technical excellence at the Spaceport America Cup. Prototyped variable drag air brake system to control rocket apogee.</p>
+        </div>
+      </div>
+
+      <!-- Plantd -->
+      <div class="timeline-item">
+        <div class="timeline-year">May –<br/>Aug 2025</div>
+        <div>
+          <p class="timeline-role">Design Engineering Intern</p>
+          <p class="timeline-company">Plantd · Oxford, NC</p>
+          <p class="timeline-desc">Blueprinted sensor mount to connect potentiometer with belts to ensure proper alignment. Developed schematics and CAD models to document PLC circuits and their enclosures. Designed pneumatics system to control and route 170 psi air to pneumatic cylinders. Engineered a circuit involving infrared sensors, string potentiometers, and interface cards.</p>
+        </div>
+      </div>
+
+      <!-- SencorpWhite -->
+      <div class="timeline-item">
+        <div class="timeline-year">Jun –<br/>Aug 2024</div>
+        <div>
+          <p class="timeline-role">Engineering Intern</p>
+          <p class="timeline-company">SencorpWhite · Barnstable, MA</p>
+          <p class="timeline-desc">Organized extensive Excel sheets to develop concise descriptions for numerous fasteners. Created manufacturing sheets to streamline the purchase process for integral parts. Configured SolidWorks toolbox to aid engineers and promote product uniformity. Communicated effectively with partners and outside organizations to accelerate projects.</p>
+        </div>
+      </div>
+
+      <!-- Teaching -->
+      <div class="timeline-item">
+        <div class="timeline-year">Sep 2024 –<br/>Present</div>
+        <div>
+          <p class="timeline-role">Student-Athlete Tutor &amp; Control Systems TA</p>
+          <p class="timeline-company">Duke University · Durham, NC</p>
+          <p class="timeline-desc">Explained advanced STEM concepts at self-coordinated tutoring sessions for student-athletes. Conducted office hours and oversaw lab periods for Control Systems, instructing students in LabVIEW.</p>
+        </div>
+      </div>
+
+      <a href="Cameron Galibois Resume.pdf" download class="download-btn">Download Resume (PDF) ↓</a>
+    </div>
+
+    <div class="skills-section">
+      <h3>CAD / Simulation</h3>
+      <ul class="skill-list">
+        <li>SolidWorks <span class="skill-dot"></span></li>
+        <li>Fusion 360 <span class="skill-dot"></span></li>
+        <li>Onshape <span class="skill-dot"></span></li>
+        <li>Ansys <span class="skill-dot"></span></li>
+      </ul>
+      <h3>Programming</h3>
+      <ul class="skill-list">
+        <li>Python <span class="skill-dot"></span></li>
+        <li>LabVIEW <span class="skill-dot"></span></li>
+        <li>Microsoft Office <span class="skill-dot"></span></li>
+      </ul>
+      <h3>Fabrication</h3>
+      <ul class="skill-list">
+        <li>CNC Mill <span class="skill-dot"></span></li>
+        <li>Waterjet <span class="skill-dot"></span></li>
+        <li>3D Printing <span class="skill-dot"></span></li>
+        <li>Lathe <span class="skill-dot"></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--paper-warm); max-width: 100%;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 7rem 4rem;">
+    <p class="section-label">05 — Contact</p>
+    <div class="contact-inner">
+      <div>
+        <h2 class="contact-heading">Let's build something <em>together.</em></h2>
+        <p class="contact-text">Open to full-time roles in mechanical and aerospace engineering. If you have a hard problem that needs a precise solution, I'd love to hear from you!</p>
+        <ul class="contact-links">
+          <li>
+            <span class="contact-link-label">Email</span>
+            <a href="mailto:ctgalibois@gmail.com">ctgalibois@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-link-label">Phone</span>
+            <a href="tel:5082454789">508-245-4789</a>
+          </li>
+          <li>
+            <span class="contact-link-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/cameron-galibois" target="_blank">linkedin.com/in/cameron-galibois</a>
+          </li>
+          <li>
+            <span class="contact-link-label">Location</span>
+            <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted);">Barnstable, MA</span>
+          </li>
+        </ul>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Cameron Galibois · Mechanical Engineer</span>
+  <span class="footer-copy">Boston, MA</span>
+</footer>
+
+</body>
+</html>
